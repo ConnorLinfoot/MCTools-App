@@ -1,0 +1,186 @@
+/* ==============================
+   Buttons                
+   =========================== */
+
+@iconColor: contrast(@navBkgnd);
+@backButtonArrow: escape('<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="BackButton" stroke-linecap="square" stroke="@{iconColor}" stroke-width="8"><g id="Line-2-+-Line-+-Line" transform="translate(15.000000, 22.000000)"><path d="M0.62909796,38.5 L37.1384668,76.3699524" id="Line-2"></path><path d="M89.3478261,39 L3.2313744,39" id="Line"></path><path d="M0.62909796,38.5 L37.1384668,0.63004759" id="Line"></path></g></g></g></svg>');
+@backButtonArrowHover: escape('<svg width="120px" height="120px" viewBox="0 0 120 120" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="BackButton" stroke-linecap="square" stroke="#ffffff" stroke-width="8"><g id="Line-2-+-Line-+-Line" transform="translate(15.000000, 22.000000)"><path d="M0.62909796,38.5 L37.1384668,76.3699524" id="Line-2"></path><path d="M89.3478261,39 L3.2313744,39" id="Line"></path><path d="M0.62909796,38.5 L37.1384668,0.63004759" id="Line"></path></g></g></g></svg>');
+@buttonHighlightColor: rgba(255,255,255,.55);
+
+@-webkit-keyframes animate-icon {
+  0%   { box-shadow: inset 0 0 0 0 rgba(red(contrast(@primaryColor)), green(contrast(@primaryColor)), blue(contrast(@primaryColor)), 0.25); }
+  65%  { box-shadow: inset 0 0 5px 30px rgba(red(contrast(@primaryColor)), green(contrast(@primaryColor)), blue(contrast(@primaryColor)), 0.25); }
+  100%  { box-shadow: inset 0 0 0 0 rgba(red(contrast(@primaryColor)), green(contrast(@primaryColor)), blue(contrast(@primaryColor)), 0.25); }
+}
+@-webkit-keyframes focused {
+  0% {
+    background-size: 0% 0%;
+  }
+  100% {
+    background-size: 300% 200%;
+  }
+}
+.align-flush { 
+  position: absolute; 
+  top: auto;
+  bottom: auto;
+  right: 10px;
+  left: auto;
+}
+body.isNativeAndroidBrowser .align-flush {
+  float: right;
+}
+button {
+  box-shadow: none; 
+  border: none;
+  color: @textColor;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: inline-flex;
+  #flex > .flex-direction(row);
+  #flex > .justify-content(center);
+  #flex > .align-items(center);
+  font-size: 12px;
+  height: 40px;
+  .box-sizing(border-box);
+  -webkit-tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  margin: 0px 10px;
+  position: relative;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  padding: 12px 20px 10px;
+  text-transform: uppercase;
+  font-family: 'Roboto Regular', HeveticaNeue, Sans-serif;
+  border-radius: 2px;
+  .transition(all 0.35s ease-out);
+  -webkit-animation-duration: 0.35s;
+  -webkit-animation-timing-function: ease-out;   
+  animation-duration: 0.35s;
+  animation-timing-function: ease-out;        
+  background-image: -webkit-radial-gradient(
+    rgba(0,0,0,0.125) 50%, 
+    rgba(0,0,0,0) 60%
+  );
+  background-size: 0 0;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-animation-fill-mode: forwards;
+    
+  &:hover {
+    -webkit-animation-name: focused;
+    animation-name: focused;
+  }
+
+  &:focus {
+    outline: none !important;
+  }
+  
+  &.no-border {
+    border: none !important;
+  }
+
+  &.action {
+    color: @textColor;
+    background-color: @actionButtonColor;
+    margin: 0 auto;
+    .size(auto, 40px);
+    min-width: 200px;
+    max-width: 300px;
+    box-shadow: 0 1px 4px @boxShadow;
+    margin: 20px auto;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: flex;
+
+    section > &.action {
+      margin: 20px auto;
+    }
+    .isDesktop &:hover {
+      box-shadow: 0 3px 7px @boxShadow;
+      background-color: @actionButtonHoverColor;
+    }
+  }
+
+  &.back, &.backTo {
+    text-align: left;
+    padding: 0 12px 0 12px !important;
+    margin: 0 0 0 0;
+    line-height: 28px;
+    color: @navBkgnd;
+    font-size: 0;
+    border: none;
+    background-color: transparent;
+    border-radius: 50%;
+    .size(40px, 40px);
+    .transition(all .5s ease-out);
+    -webkit-animation-delay: .5s;
+  }
+
+  &.back::after, &.backTo::after {
+    content: '';
+    display: block;
+    .size(40px, 40px);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-image: url("@{imageMaskRoot}@{backButtonArrow}");
+    background-position: 50% 50%;
+    background-size: 90% 90%;
+    background-repeat: no-repeat;
+  }
+
+
+  .isDesktop &.back:hover, .isDesktop &.backTo:hover {
+    background-color: rgba(red(@iconColor), green(@iconColor), blue(@iconColor), 0.35) !important;
+    -webkit-animation: animate-icon .5s none;
+    &::after {
+      background-image: url("@{imageMaskRoot}@{backButtonArrowHover}") !important;
+    }
+  }
+}
+body {
+
+  &.isChrome {
+
+    a.button.back, a.button.backTo {
+      top: 6px;
+    }
+  }
+
+  &.isNativeAndroidBrowser {
+
+    button.back, button.backTo {
+      top: 0;
+       bottom: 0;
+
+       &::after {
+        top: -2px;
+       }
+    }
+    button.backTo::after {
+      top: 2px;
+    }
+    button.back::before {
+      top: 8px;
+    }
+  }    
+}
+html[dir=rtl] button {
+  line-height: 12pt;
+   
+  &.back, &.backTo {
+    margin: 0 0 0 16px;
+    
+    &::after {
+      .transform(rotate(180deg));
+      right: auto;
+    }
+  }
+
+  &.align-flush {
+    left: 10px;
+    right: auto;
+  }
+}

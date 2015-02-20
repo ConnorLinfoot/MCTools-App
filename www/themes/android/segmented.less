@@ -1,0 +1,84 @@
+/* ==============================
+   Segmented Control
+   =========================== */
+.segmented:not(.paging) {
+  #flex > .display(inline-flex);
+  #flex > .flex-direction(row);
+  #flex > .justify-content(center);
+
+  .box-sizing(border-box);
+  margin: 0px 10px;
+  #flex > .flex(1) !important;
+
+  &.align-flush{
+    position: absolute;
+    right: 15px;
+    top: 4px;
+  }
+
+  > button {
+    #flex > .display(flex);
+    #flex > .flex-direction(column);
+    #flex > .justify-content(center);
+    #flex > .align-items(center);
+    border: solid 1px @switchBorder;
+    text-align: center !important;
+    border-left: none;
+    border-right: solid 1px @switchBorder;
+    box-shadow: none;
+    font-size: 13px;
+    .box-sizing(border-box);
+    height: 30px;
+    cursor: pointer;
+    margin: 0px !important;
+    padding: 6px 10px 0px !important;
+    border-radius: 0;
+
+    &:first-of-type {
+      border-left: solid 1px @switchBorder;
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px
+    }
+
+    &:last-of-type {
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px
+    }
+
+    .isDesktop &:hover, &.selected {
+      background-color: @primaryColor;
+      opacity: 1 !important;
+      box-shadow: none;    
+      color: contrast(@primaryColor); 
+    }
+  }
+}
+
+div.horizontal.centered > .segmented {
+  #flex > .display(flex);
+  #flex > .flex(1) !important;
+  margin: 10px 16px;
+  width: 100%;
+}
+
+html[dir=rtl] {
+  .segmented.align-flush {
+    left: 15px;
+    right: auto;
+  }
+  .segmented:not(.paging) > button {
+    border-radius: 0px;
+
+    &:first-child {
+      border-top-right-radius: 2px;
+      border-bottom-right-radius: 2px;
+      border-left: none;
+    }
+
+    &:last-child {
+      border-top-left-radius: 2px;
+      border-bottom-left-radius: 2px;
+      border-left: solid 1px @switchBorder;
+    }
+  }
+}

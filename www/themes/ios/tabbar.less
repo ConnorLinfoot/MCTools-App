@@ -1,0 +1,73 @@
+/* ==============================
+   Tab Bar
+   =========================== */
+@tabbarMoreSVG: escape("<svg version='1.1' id='Layer_2' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' width='48px' height='48px' viewBox='0 0 48 48' enable-background='new 0 0 48 48' xml:space='preserve'><circle cx='10' cy='23' r='5.172'/><circle cx='24' cy='23' r='5.172'/><circle cx='38' cy='23' r='5.172'/></svg>");
+
+body.hasTabBar {
+/*
+  nav {
+    background-color: @navBkgnd;
+    border-bottom: solid 1px #a7a7aa;
+  }*/
+
+  article {
+    bottom: 50px;
+  }
+
+  .previous:not(.navigable), .next:not(.navigable) {
+    display: none;
+    -webkiit-transform: none;
+  }
+}
+
+.tabbar {
+  #flex > .display(flex);
+  #flex > .flex-direction(row);
+  #flex > .justify-content(flex-start);
+  #flex > .align-items(center);  
+  height: 50px;
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  .box-sizing(border-box);
+  border-top: solid 1px @tabbarButton;
+  background-color: @tabbarBkgnd;
+
+  > button {
+    height: 100%;
+    position: relative;
+    padding: 0;
+    #flex > .display(flex);
+    #flex > .flex-direction(column);
+    #flex > .justify-content(center);
+    #flex > .align-items(center);
+    #flex > .flex(1) !important;
+    display: -webkit-flex;
+    color: @tabbarButton;
+    font-size: 9pt;
+    padding: 1px;
+
+    .isDesktop &:hover, &.selected {
+      color: @tabbarButtonSelected !important;
+      opacity: 1 !important;
+
+      > .icon {
+        background-color: @tabbarButtonSelected !important;
+      }
+    }
+
+    > .icon {
+      margin: 0 auto;
+      background-color: @tabbarButton;
+      content: '';
+      display: block;
+      height: 30px;
+      width: 30px;      
+    }
+
+    &.more > .icon {
+      .image-mask(@tabbarButton,@tabbarMoreSVG);
+    }
+  }
+}

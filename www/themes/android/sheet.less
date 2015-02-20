@@ -1,0 +1,92 @@
+/* ==============================
+   Sheet Control
+   =========================== */
+@sheetHandleSVG: escape('<svg width="94px" height="37px" viewBox="0 0 94 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(1.000000, 1.000000)" id="Artboard-1" fill="@{sheetHandle}"><path d="M46,10.1317773 L4.17415422,35.2632809 L-0.46118846,27.5487752 L45.8258458,-0.2632809 L46,0.0265604 L46.1741542,-0.2632809 L92.4611885,27.5487752 L87.8258458,35.2632809 L46,10.1317773 L46,10.1317773 Z" id="Rectangle-2"></path></g></g></svg>');
+@sheetHandleHoverColor: contrast(@navBkgnd);
+@sheetHandleSVGHover: escape('<svg width="94px" height="37px" viewBox="0 0 94 37" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(1.000000, 1.000000)" id="Artboard-1" fill="@{sheetHandleHoverColor}"><path d="M46,10.1317773 L4.17415422,35.2632809 L-0.46118846,27.5487752 L45.8258458,-0.2632809 L46,0.0265604 L46.1741542,-0.2632809 L92.4611885,27.5487752 L87.8258458,35.2632809 L46,10.1317773 L46,10.1317773 Z" id="Rectangle-2"></path></g></g></svg>');
+.sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: @sheetBkgnd;
+  .transition(all .25s ease-in);
+  .transform(translate3d(0,-100%,0));
+  display: none;
+
+  &.opened {
+    .transform(translate3d(0,0,0));
+
+    > section.scroller-vertical {
+      top: 36px;
+      padding: 10px 0 100px 0 !important;
+    }
+  }
+
+  > section {
+
+    &.scroller-vertical {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      height: auto;
+      right: 0;
+      padding: 0 !important;
+    }
+    
+    > .list {
+      border: none;
+      background-color: transparent !important;
+
+      > li {
+        background-color: transparent !important;
+        border-bottom: solid 1px @listBorderColor;
+
+        &::before {
+          content: none;
+        }
+      }
+    }
+  }
+
+  button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px !important;
+    .size(auto, auto);
+  }
+
+  div.handle {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
+    cursor: pointer;
+    -webkit-transform: translate3d(0,0,0);
+    transform: translate3d(0,0,0);
+    height: 29pt;
+    background-color: rgba(0,0,0,.001);
+    background-image: url("@{imageMaskRoot}@{sheetHandleSVG}");
+    background-position: 50% 50%;
+    background-size: auto 40%;
+    background-repeat: no-repeat;
+    margin: 10px auto 0;
+
+    .isDesktop &:hover {
+      background-color: @primaryColor;
+      background-image: url("@{imageMaskRoot}@{sheetHandleSVGHover}");
+    }
+    .isNativeAndroidBrowser & {
+      background-size: 20% auto;
+    }
+  }
+}
+
+html[dir=rtl] {
+  .sheet > section > h2 {
+    font-weight: bold !important;
+    font-size: 16pt !important;
+    line-height: 20pt !important;
+  }
+}
